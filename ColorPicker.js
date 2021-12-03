@@ -19,6 +19,7 @@ const srcSlider = require('./assets/graphics/ui/black-gradient.png')
 const srcSliderRotated = require('./assets/graphics/ui/black-gradient-rotated.png')
 
 const PALLETE = [
+	'#ffffff',
 	'#000000',
 	'#888888',
 	'#ed1c24',
@@ -501,7 +502,7 @@ module.exports = class ColorPicker extends Component {
 		this.swatches = PALLETE.map((c,i) => (
 			<View style={[ss.swatch,{backgroundColor:c}]} key={'S'+i}>
 				<TouchableWithoutFeedback onPress={x=>this.onSwatchPress(c,i)}>
-					<Animated.View style={[ss.swatchTouch,{backgroundColor:c,transform:[{scale:this.swatchAnim[i].interpolate({inputRange:[0,0.5,1],outputRange:[0.666,1,0.666]})}]}]} />
+					<Animated.View style={[ss.swatchTouch,{backgroundColor:c, borderWidth: c === "#ffffff" ? 1 : 0,transform:[{scale:this.swatchAnim[i].interpolate({inputRange:[0,0.5,1],outputRange:[0.666,1,0.666]})}]}]} />
 				</TouchableWithoutFeedback>
 			</View>
 		))
@@ -622,8 +623,6 @@ const ss = StyleSheet.create({
 		position: 'relative',
 		overflow: 'visible',
 		width: '100%',
-		minWidth: 200,
-		minHeight: 200,
 		// aspectRatio: 1,
 		// backgroundColor: '#ffccff',
 	},
@@ -691,9 +690,9 @@ const ss = StyleSheet.create({
 		// padding: 16,
 	},
 	swatch: {
-		width: 20,
-		height: 20,
-		borderRadius: 10,
+		width: 16,
+		height: 16,
+		borderRadius: 8,
 		// borderWidth: 1,
 		borderColor: '#8884',
 		alignItems: 'center',
@@ -701,10 +700,11 @@ const ss = StyleSheet.create({
 		overflow: 'visible',
 	},
 	swatchTouch: {
-		width: 30,
-		height: 30,
-		borderRadius: 15,
+		width: 24,
+		height: 24,
+		borderRadius: 12,
 		backgroundColor: '#f004',
 		overflow: 'hidden',
+		borderColor: "#222222"
 	},
 })
